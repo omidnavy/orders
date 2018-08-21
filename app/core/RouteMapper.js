@@ -23,8 +23,8 @@ const packageDefinition = protoLoader.loadSync(
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 const proto = protoDescriptor;
 const server = new grpc.Server();
-const packageName = "Users";
-const serviceName = "Users";
+const packageName = "Orders";
+const serviceName = "Orders";
 module.exports = class RouteMapper {
     constructor() {
         this.server = server;
@@ -46,7 +46,7 @@ module.exports = class RouteMapper {
             }
         });
         this.server.addService(proto[packageName][serviceName].service, route);
-        this.server.bind(`0.0.0.0:${process.argv.slice(2)[0] || '50052'}`, grpc.ServerCredentials.createInsecure());
+        this.server.bind(`0.0.0.0:${process.argv.slice(2)[0] || '50051'}`, grpc.ServerCredentials.createInsecure());
         this.server.start();
     }
 };

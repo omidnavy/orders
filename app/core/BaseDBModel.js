@@ -12,7 +12,7 @@ client.on('error', (e) => logger('error', e));
 
 
 const mongojs = require('mongoist');
-const url = "mongodb://192.168.0.7:27017/users";
+const url = "mongodb://192.168.0.7:27017/orders";
 const config = require('./config/database').development;
 const BaseModel = require('./BaseModel');
 
@@ -28,16 +28,10 @@ db.on('connect', function () {
 // db.dropDatabase()
 (async () => {
     try {
-        await db.createCollection('users', {autoIndexId: true});
+        await db.createCollection('orders', {autoIndexId: true});
     }
     catch (e) {
         if (e.codeName !== 'NamespaceExists') logger('error', e)
-    }
-    try {
-        await db.users.createIndex({Phone: 1}, {unique: true})
-    }
-    catch (e) {
-        logger('error', e)
     }
 })();
 
@@ -49,8 +43,5 @@ module.exports = class BaseDBModel extends BaseModel {
         this.redis = client;
     }
 
-    async doesPhoneExists(phone) {
-        return (await this.db.users.findOne({Phone: phone}))
-    }
 
 };

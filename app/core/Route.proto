@@ -1,105 +1,39 @@
 syntax = "proto3";
 
-package Users;
+package Orders;
 
-service Users {
-    rpc CheckLogin (CheckLoginRequestMessage) returns (CheckLoginReplyMessage) {
+service Orders {
+    rpc NewOrder (NewOrderRequest) returns (NewOrderResponse) {
     };
-    rpc Register (RegisterRequestMessage) returns (RegisterReplyMessage) {
-    };
-    rpc Edit (EditRequestMessage) returns (EditReplyMessage) {
-    };
-    rpc ChangePassword (ChangePasswordRequestMessage) returns (ChangePasswordReplyMessage) {
-    };
-    rpc ForgetPasswordRequest (FPRRequestMessage) returns (FPRReplyMessage) {
-    };
-    rpc ForgetPasswordChange (FPCRequestMessage) returns (FPCReplyMessage) {
+    rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse) {
     };
     rpc Info (InfoRequestMessage) returns (InfoReplyMessage) {
     };
 }
 
-
+/*User Info*/
+message DeleteOrderRequest {
+    string user = 1;
+    string order = 2;
+}
+message DeleteOrderResponse {
+    bool status = 1;
+}
+/*User Info*/
+message NewOrderRequest {
+    string user = 1;
+    string type = 2;
+    string order = 3;
+}
+message NewOrderResponse {
+    bool status = 1;
+    string msg = 2;
+}
 /*User Info*/
 message InfoRequestMessage {
     string id = 1;
 }
 message InfoReplyMessage {
-    bool status = 1;
-    string msg = 2;
-}
-
-
-/*Check Login*/
-message CheckLoginRequestMessage {
-    string username = 1;
-    string password = 2;
-}
-message CheckLoginReplyMessage {
-    bool status = 1;
-    User user = 2;
-
-    message User {
-        string _id = 1;
-        string Role = 2;
-        string Firstname = 4;
-        string Lastname = 5;
-        string Email = 6;
-        string Phone = 7;
-        int32 Status = 8;
-    }
-}
-
-/*Register*/
-message RegisterRequestMessage {
-    string type = 1;
-    string user = 2;
-}
-message RegisterReplyMessage {
-    bool status = 1;
-    string msg = 2;
-}
-
-/*Edit*/
-message EditRequestMessage {
-    string type = 1;
-    string _id = 2;
-    string user = 3;
-}
-message EditReplyMessage {
-    bool status = 1;
-    string msg = 2;
-}
-
-/*ChangePassword*/
-message ChangePasswordRequestMessage {
-    string _id = 1;
-    string oldPassword = 2;
-    string newPassword = 3;
-}
-message ChangePasswordReplyMessage {
-    bool status = 1;
-    string msg = 2;
-}
-
-/*ForgetPasswordRequest*/
-message FPRRequestMessage {
-    string mode = 1;
-    string value = 2;
-}
-message FPRReplyMessage {
-    bool status = 1;
-    string msg = 2;
-    string phone = 3;
-    string id = 4;
-}
-/*ForgetPasswordChange*/
-message FPCRequestMessage {
-    string id = 1;
-    string token = 2;
-    string password = 3;
-}
-message FPCReplyMessage {
     bool status = 1;
     string msg = 2;
 }
