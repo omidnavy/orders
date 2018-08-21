@@ -7,11 +7,9 @@ module.exports = class NewOrderController extends BaseController {
         this.model = new Model();
     }
 
-    main(call, callback) {
-        (async () => {
-            let response = await this.model.remove(call.request.user,call.request.order);
-            if (response.status === 'error') callback(null, {status: false});
-            else callback(null, {status: true})
-        })()
+    async main(call, callback) {
+        let response = await this.model.remove(call.request.user, call.request.order);
+        if (response.status === 'error') callback(null, {status: false});
+        else callback(null, {status: true})
     }
 };

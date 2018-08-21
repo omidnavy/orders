@@ -7,11 +7,9 @@ module.exports = class NewOrderController extends BaseController {
         this.model = new Model();
     }
 
-    main(call, callback) {
-        (async () => {
-            let response = await this.model.register(call.request.user,call.request.type,JSON.parse(call.request.order));
-            if (response.status === 'error') callback(null, {status: false, msg: response.error});
-            else callback(null, {status: true, msg: response.id})
-        })()
+    async main(call, callback) {
+        let response = await this.model.register(call.request.user, call.request.type, JSON.parse(call.request.order));
+        if (response.status === 'error') callback(null, {status: false, msg: response.error});
+        else callback(null, {status: true, msg: response.id})
     }
 };
