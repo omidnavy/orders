@@ -18,7 +18,7 @@ module.exports = class UploadController extends BaseController {
             res.status(201).send('success')
 
         }.bind(this));
-        form.on('file', function (name, file) {
+        form.on('file', (name, file) => {
             moveFile(file.path, './upload/' + req.params.user + '/' + req.params.order + '/' + file.originalFilename)
         });
     }
