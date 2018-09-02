@@ -1,5 +1,5 @@
 const BaseController = require("../../core/BaseController");
-const Model = require("./RegisterModel");
+const Model = require("./NewOrderModel");
 const multiparty = require('multiparty')
     , fs = require('fs');
 module.exports = class UploadController extends BaseController {

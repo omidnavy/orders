@@ -18,7 +18,7 @@ client.on('error', (e) => logger('error', e));
 
 
 const mongojs = require('mongoist');
-const url = `mongodb://${config.host}:27017/users`;
+const url = `mongodb://${config.host}:27017/orders`;
 const BaseModel = require('./BaseModel');
 
 const db = mongojs(url, {useNewUrlParser: true});

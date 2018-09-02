@@ -1,5 +1,5 @@
 const BaseController = require("../../core/BaseController");
-const Model = require("./RegisterModel");
+const Model = require("./NewOrderModel");
 
 module.exports = class NewOrderController extends BaseController {
     constructor() {
