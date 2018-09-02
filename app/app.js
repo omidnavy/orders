@@ -3,6 +3,9 @@ const routes = require('./core/RouteMapper');
 const express = require('express')
     , cors = require('cors')
     , app = express();
+
+const argv = require('minimist')(process.argv.slice(2));
+const port = argv.port || '4000';
 new routes();
 const upload = require('./components/NewOrder/UploadController');
 const Upload = new upload();
@@ -17,6 +20,6 @@ process.on('uncaughtException', function (err) {
 
 app.post('/upload/:user/:order', cors(), Upload.upload.bind(this));
 
-app.listen(4000, function(){
-    console.log('CORS-enabled web server listening on port 4000');
+app.listen(port, function(){
+    console.log(`CORS-enabled web server listening on port ${port}`);
 });

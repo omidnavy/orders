@@ -25,6 +25,8 @@ const proto = protoDescriptor;
 const server = new grpc.Server();
 const packageName = "Orders";
 const serviceName = "Orders";
+const argv = require('minimist')(process.argv.slice(2));
+const port = argv.port || '50051';
 module.exports = class RouteMapper {
     constructor() {
         this.server = server;
@@ -46,7 +48,7 @@ module.exports = class RouteMapper {
             }
         });
         this.server.addService(proto[packageName][serviceName].service, route);
-        this.server.bind(`0.0.0.0:${process.argv.slice(2)[0] || '50051'}`, grpc.ServerCredentials.createInsecure());
+        this.server.bind(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure());
         this.server.start();
     }
 };

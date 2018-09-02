@@ -2,7 +2,9 @@
 Simple MYSQL DB Class using pools and basic query function.
 you can extend this class as you need or change it to another DB
  */
-const config = require('./config/database').home;
+const argv = require('minimist')(process.argv.slice(2));
+const env = argv.enviroment || 'home';
+const config = require('./config/database')[env];
 
 
 
